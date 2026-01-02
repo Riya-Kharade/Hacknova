@@ -448,8 +448,8 @@
             </div>
             
             <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 EcoPulse. Built with ❤️ for environmental awareness.</p>
-                <p class="mt-2 text-sm">Hackathon 2024 • Environmental Data Initiative</p>
+                <p>&copy; <span id="year"></span> EcoPulse. Built with ❤️ for environmental awareness.</p>
+                <p class="mt-2 text-sm">Hackathon • Environmental Data Initiative</p>
             </div>
         </div>
     </footer>
@@ -463,6 +463,10 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/main.js" defer></script>
+    <script>
+      // Auto-update year in footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
     <script>// Scroll to Top Functionality
 ;(() => {
   const scrollButton = document.getElementById("scroll-to-top")
