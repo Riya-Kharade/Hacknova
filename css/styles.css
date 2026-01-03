@@ -496,3 +496,122 @@ input[type=range]::-webkit-slider-runnable-track {
     border-radius: 2px;
 }
 
+/* ===============================
+   REVIEW SECTION STYLES
+================================ */
+
+.reviews-section {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    position: relative;
+    overflow: hidden;
+}
+
+.reviews-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.reviews-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.reviews-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #38bdf8, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.reviews-header p {
+    color: #94a3b8;
+    font-size: 1.2rem;
+}
+
+/* Review Cards */
+.review-card {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin: 1rem;
+    min-width: 300px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.review-content {
+    color: #e2e8f0;
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+}
+
+.review-author .author-name {
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+.review-author .author-title {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+/* Scrolling Reviews */
+.reviews-track {
+    display: flex;
+    width: max-content;
+    animation: scrollReviews 30s linear infinite;
+}
+
+.reviews-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollReviews {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.reviews-wrapper {
+    display: flex;
+    width: 200%; /* Double width to create seamless loop */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .reviews-header h2 {
+        font-size: 2rem;
+    }
+    
+    .review-card {
+        min-width: 280px;
+        padding: 1.25rem;
+    }
+    
+    .reviews-track {
+        animation: scrollReviews 20s linear infinite;
+    }
+}
+
+
