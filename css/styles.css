@@ -392,7 +392,14 @@
   }
 
   .hero-glass {
-    padding: 36px 24px;
+    padding: 32px 20px;
+  }
+  .hero-glass h1 {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
+
+  .hero-glass p {
+    font-size: 1rem;
   }
   .fade-left,
   .fade-right {
@@ -414,6 +421,18 @@
 ================================ */
 
 /* --- Custom Logo Styles --- */
+footer {
+  background: linear-gradient(
+    to top,
+    #020617,
+    #020617 60%,
+    transparent
+  );
+}
+
+section {
+  scroll-margin-top: 80px;
+}
 .gradient-text {
     background: linear-gradient(to right, #ffffff, #9ca3af); /* White to Gray-400 */
     -webkit-background-clip: text;
