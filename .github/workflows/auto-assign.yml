@@ -6,18 +6,24 @@ on:
 
 jobs:
   assign:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Assign issue to creator
         uses: actions/github-script@v7
         with:
           script: |
-            const issue = context.payload.issue;
-            const creator = issue.user.login;
+            try {
+              const issue = context.payload.issue;
+              const creator = issue.user.login;
 
-            await github.rest.issues.addAssignees({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              assignees: [creator],
-            });
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                assignees: [creator],
+              });
+            } catch (error) {
+              core.setFailed(`Failed to assign issue: ${error.message}`);
+            }
