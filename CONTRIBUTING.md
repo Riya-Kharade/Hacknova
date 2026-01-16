@@ -35,10 +35,11 @@ cd ecopulse
 
 ### 3. Create a New Branch
 git checkout -b feature/your-feature-name
+```
 
 ### 4. Make Your Changes ✏️
 
-Follow the existing project structure
+- Follow the existing project structure
 
 ✅ Keep code modular and readable
 
@@ -49,10 +50,13 @@ Follow the existing project structure
 ### 5. Commit Your Changes
 git add .
 git commit -m "feat: concise description of changes"
+```
 
 ### 6. Push and Open a Pull Request
 git push origin feature/your-feature-name
+```
 
+### 7. Open a Pull Request from your fork to the main repository.
 
 ### 7. Open a Pull Request from your fork to the main repository.
 
