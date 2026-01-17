@@ -1110,6 +1110,26 @@ feat/live-countdown-sticky-cta
     <!-- ✅ MODULE SCRIPT -->
     <script type="module" src="js/script.js"></script>
 
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    });
+  }
+
+  // Optional: Network status feedback
+  window.addEventListener('offline', () => {
+    console.warn('You are offline');
+  });
+
+  window.addEventListener('online', () => {
+    console.log('Back online');
+  });
+</script>
+
 </body>
 
     <script src="js/script.js"></script>
