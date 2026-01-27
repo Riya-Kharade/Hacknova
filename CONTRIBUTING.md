@@ -30,8 +30,10 @@ Create your own fork of the repository on GitHub.
 
 ### 2. Clone Your Fork
 
+```bash
 git clone https://github.com/your-username/ecopulse.git
 cd ecopulse
+```
 
 ### 3. Create a New Branch
 git checkout -b feature/your-feature-name
