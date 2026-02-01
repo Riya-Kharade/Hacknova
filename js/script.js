@@ -569,3 +569,97 @@ document.addEventListener("DOMContentLoaded", () => {
     yearSpan.textContent = new Date().getFullYear();
   }
 });
+// ===============================
+// PRECAUTION MODAL FUNCTIONS (GLOBAL)
+// ===============================
+
+function openPrecautions(type) {
+  const modal = document.getElementById("precaution-modal");
+  const title = document.getElementById("precaution-title");
+  const content = document.getElementById("precaution-content");
+
+  const data = {
+    air: {
+      title: "🌬️ Air Pollution Precautions",
+      points: [
+        "Use public transport or carpool",
+        "Avoid burning waste",
+        "Plant trees and support green spaces",
+        "Use masks during high AQI days"
+      ]
+    },
+    water: {
+      title: "💧 Water Pollution Precautions",
+      points: [
+        "Do not dump waste into water bodies",
+        "Use eco-friendly detergents",
+        "Conserve water",
+        "Support clean-water initiatives"
+      ]
+    },
+    light: {
+      title: "💡 Light Pollution Precautions",
+      points: [
+        "Use warm, low-intensity lighting",
+        "Turn off unnecessary outdoor lights",
+        "Use motion sensors",
+        "Support dark-sky initiatives"
+      ]
+    },
+    noise: {
+      title: "🔊 Noise Pollution Precautions",
+      points: [
+        "Avoid unnecessary honking",
+        "Use soundproofing where possible",
+        "Follow noise regulations",
+        "Limit loud activities at night"
+      ]
+    }
+  };
+
+  title.textContent = data[type].title;
+  content.innerHTML = data[type].points
+    .map(p => `<li class="mb-2">• ${p}</li>`)
+    .join("");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
+function closePrecautions() {
+  const modal = document.getElementById("precaution-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+}
+
+// Cursor Glow Effect
+(() => {
+  const glow = document.getElementById('cursor-glow');
+  if (!glow) return;
+
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+
+  const speed = 0.15;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    glow.style.opacity = '1';
+  });
+
+  window.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+
+  function animate() {
+    currentX += (mouseX - currentX) * speed;
+    currentY += (mouseY - currentY) * speed;
+
+    glow.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
+
