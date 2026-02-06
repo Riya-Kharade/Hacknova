@@ -1,1 +1,71 @@
+name: Auto Manage PR & Issues
 
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issues:
+    types: [opened]
+
+jobs:
+
+  pr-auto:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count lines changed
+        id: lines
+        run: |
+          LINES=$(git diff --shortstat origin/${{ github.base_ref }} | awk '{print $4}')
+          echo "lines=$LINES" >> $GITHUB_OUTPUT
+
+      - name: Add difficulty label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const lines = parseInt('${{ steps.lines.outputs.lines }}') || 0;
+            let label = 'Easy';
+            if(lines > 50 && lines <= 200) label = 'Medium';
+            if(lines > 200) label = 'Hard';
+
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [label]
+            });
+
+      - name: Auto approve PR
+        uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto merge PR
+        uses: pascalgn/automerge-action@v0.15.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_METHOD: squash
+
+
+  issue-label:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Add SWoC labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['SWoC26', 'ECWoC26']
+            });
