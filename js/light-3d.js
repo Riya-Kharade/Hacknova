@@ -50,6 +50,9 @@ class LightPollutionScene {
             this.renderer.setSize(container.clientWidth, container.clientHeight);
             this.renderer.setClearColor(0x000011, 1);
             container.appendChild(this.renderer.domElement);
+
+            this.applyTheme();
+            document.addEventListener('ecopulse-theme-change', () => this.applyTheme());
             
             // Add lighting
             this.addBaseLighting();
@@ -88,6 +91,24 @@ class LightPollutionScene {
             
         } catch (error) {
             console.error('Error initializing Light Pollution Scene:', error);
+        }
+    }
+
+    applyTheme() {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const palette = isLight
+            ? { background: 0x1f2937, fog: 0x111827 }
+            : { background: 0x000011, fog: 0x000022 };
+
+        if (this.scene) {
+            this.scene.background = new THREE.Color(palette.background);
+            if (this.scene.fog) {
+                this.scene.fog.color.setHex(palette.fog);
+            }
+        }
+
+        if (this.renderer) {
+            this.renderer.setClearColor(palette.background, 1);
         }
     }
     

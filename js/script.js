@@ -297,6 +297,18 @@ EcoPulse.DashboardManager = {
     this.initPollutionChart();
     this.initLoadingAnimation();
   },
+
+  getChartColors: function() {
+    const styles = getComputedStyle(document.documentElement);
+    return {
+      background: styles.getPropertyValue("--chart-bg").trim() || "#111827",
+      grid: styles.getPropertyValue("--chart-grid").trim() || "#374151",
+      label: styles.getPropertyValue("--chart-label").trim() || "#9ca3af",
+      air: "#38bdf8",
+      water: "#22c55e",
+      noise: "#8b5cf6"
+    };
+  },
   
   setupDashboardControls: function() {
     const modeButtons = document.querySelectorAll('.dashboard-mode-btn');
@@ -443,45 +455,45 @@ EcoPulse.DashboardManager = {
     // Initialize the pollution trend chart
     const ctx = document.getElementById('pollution-trend-chart');
     if (ctx) {
-      // In a real implementation, we would use Chart.js or similar
-      // For now, we'll just set up the canvas dimensions
       const container = ctx.parentElement;
-      ctx.width = container.clientWidth;
-      ctx.height = 300;
-      
-      // Draw a placeholder chart
-      const canvas = ctx.getContext('2d');
-      canvas.fillStyle = '#374151';
-      canvas.fillRect(0, 0, ctx.width, ctx.height);
-      
-      // Draw a simple line chart placeholder
-      canvas.strokeStyle = '#38bdf8';
-      canvas.lineWidth = 3;
-      canvas.beginPath();
-      canvas.moveTo(0, ctx.height - 50);
-      
-      // Generate a simple wave pattern
-      for (let i = 0; i < ctx.width; i += 20) {
-        const y = ctx.height - 80 - Math.sin(i / 30) * 30 - Math.random() * 20;
-        canvas.lineTo(i, y);
-      }
-      canvas.stroke();
-      
-      // Add labels
-      canvas.fillStyle = '#9ca3af';
-      canvas.font = '12px Arial';
-      canvas.fillText('Air', 10, 20);
-      canvas.fillStyle = '#22c55e';
-      canvas.fillText('Water', 10, 40);
-      canvas.fillStyle = '#8b5cf6';
-      canvas.fillText('Noise', 10, 60);
-      
-      // Update when window resizes
-      window.addEventListener('resize', () => {
+
+      const renderChart = () => {
+        const colors = this.getChartColors();
         ctx.width = container.clientWidth;
         ctx.height = 300;
-        this.initPollutionChart();
-      });
+
+        const canvas = ctx.getContext('2d');
+        canvas.clearRect(0, 0, ctx.width, ctx.height);
+        canvas.fillStyle = colors.background;
+        canvas.fillRect(0, 0, ctx.width, ctx.height);
+
+        canvas.strokeStyle = colors.air;
+        canvas.lineWidth = 3;
+        canvas.beginPath();
+        canvas.moveTo(0, ctx.height - 50);
+
+        for (let i = 0; i < ctx.width; i += 20) {
+          const y = ctx.height - 80 - Math.sin(i / 30) * 30 - Math.random() * 20;
+          canvas.lineTo(i, y);
+        }
+        canvas.stroke();
+
+        canvas.fillStyle = colors.label;
+        canvas.font = '12px Arial';
+        canvas.fillText('Air', 10, 20);
+        canvas.fillStyle = colors.water;
+        canvas.fillText('Water', 10, 40);
+        canvas.fillStyle = colors.noise;
+        canvas.fillText('Noise', 10, 60);
+      };
+
+      if (!this._chartResizeHandler) {
+        this._chartResizeHandler = () => renderChart();
+        window.addEventListener('resize', this._chartResizeHandler);
+        document.addEventListener('ecopulse-theme-change', this._chartResizeHandler);
+      }
+
+      renderChart();
     }
   },
   
