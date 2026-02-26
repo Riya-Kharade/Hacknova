@@ -11,7 +11,7 @@ class AirPollutionScene {
         this.pollutionLevel = 156; // Default to unhealthy level
         this.animationId = null;
         this.isInitialized = false;
-        
+        this.handleResize = this.onWindowResize.bind(this);
         this.init();
     }
     
@@ -46,6 +46,9 @@ class AirPollutionScene {
             this.renderer.setSize(container.clientWidth, container.clientHeight);
             this.renderer.setClearColor(0x000000, 0);
             container.appendChild(this.renderer.domElement);
+
+            this.applyTheme();
+            document.addEventListener('ecopulse-theme-change', () => this.applyTheme());
             
             // Add lighting
             this.addLighting();
@@ -54,7 +57,8 @@ class AirPollutionScene {
             this.createPollutionParticles();
             
             // Handle window resize
-            window.addEventListener('resize', () => this.onWindowResize());
+           window.addEventListener('resize', this.handleResize);
+
             
             // Set initialized flag
             this.isInitialized = true;
@@ -78,6 +82,19 @@ class AirPollutionScene {
             
         } catch (error) {
             console.error('Error initializing Air Pollution Scene:', error);
+        }
+    }
+
+    applyTheme() {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const fogColor = isLight ? 0xdbeafe : 0x000000;
+
+        if (this.scene && this.scene.fog) {
+            this.scene.fog.color.setHex(fogColor);
+        }
+
+        if (this.renderer) {
+            this.renderer.setClearColor(fogColor, 0);
         }
     }
     
@@ -207,7 +224,8 @@ class AirPollutionScene {
         }
         
         // Remove event listeners
-        window.removeEventListener('resize', this.onWindowResize);
+        window.removeEventListener('resize', this.handleResize);
+
         
         // Clear scene
         if (this.scene) {
