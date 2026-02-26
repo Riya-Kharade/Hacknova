@@ -7,14 +7,21 @@
     <meta name="description"
         content="Explore noise pollution data through interactive 3D visualizations. Understand the impact of urban sound on health and environment.">
     <title>Noise Pollution - EcoPulse</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- other styles -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/noise.css">
+
+
     <link rel="stylesheet" href="css/air.css">
     
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔊</text></svg>">
+   <link rel="icon" type="image/png" href="ecopulse-logo.png">
+
     <script>
         tailwind.config = {
             theme: {
@@ -54,6 +61,10 @@
 </head>
 
 <body class="bg-gray-900 text-white font-['Inter']">
+    <div id="network-status" class="online">
+  You are back online
+</div>
+
     <!-- Skip to Content Link for Accessibility -->
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only" aria-label="Skip to main content">Skip to main content</a>
     
@@ -217,8 +228,10 @@
                                         class="text-eco-purple font-bold font-mono bg-gray-800 px-2 py-0.5 rounded">65 dB (Moderate)</span>
                                 </div>
                                 <div class="relative w-full h-6 flex items-center">
-                                    <input type="range" id="noise-level-slider" min="0" max="120" value="65"
-                                        class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-eco-purple hover:accent-purple-400 transition-all z-10">
+                                    <input type="range" id="noise-level-slider" min="0" max="120" value="65" step="1"
+                                        class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-eco-purple hover:accent-purple-400 
+                                        transition-all z-10  hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-orange-500/40 "
+                                        role="slider" aria-label="Adjust ambient noise level" aria-valuemin="0" aria-valuemax="120" aria-valuenow="65" />
                                 </div>
                                 <div class="flex justify-between text-xs text-gray-500 mt-2 font-mono">
                                     <span>Silent</span>
@@ -299,6 +312,16 @@
                 </div>
             </div>
         </section>
+        <div class="cursor-container">
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+            <span class="cursor-dot"></span>
+        </div>
     </main>
 
     <footer class="bg-gray-900 border-t border-gray-800 py-12">
@@ -309,7 +332,7 @@
                     <span class="text-white font-bold text-2xl">E</span>
                 </div>
             </div>
-            <p class="text-gray-500 text-sm">&copy; 2024 EcoPulse. Environmental Monitoring System.</p>
+            <p class="text-gray-500 text-sm">&copy; 2026 EcoPulse. Environmental Monitoring System.</p>
         </div>
     </footer>
 
@@ -374,6 +397,28 @@
             }
         });
     </script>
+
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    });
+  }
+
+  // Optional: Network status feedback
+  window.addEventListener('offline', () => {
+    console.warn('You are offline');
+  });
+
+  window.addEventListener('online', () => {
+    console.log('Back online');
+  });
+</script>
+<div id="cursor-glow"></div>
+
 </body>
 
 </html>

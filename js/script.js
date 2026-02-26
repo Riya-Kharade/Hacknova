@@ -297,6 +297,18 @@ EcoPulse.DashboardManager = {
     this.initPollutionChart();
     this.initLoadingAnimation();
   },
+
+  getChartColors: function() {
+    const styles = getComputedStyle(document.documentElement);
+    return {
+      background: styles.getPropertyValue("--chart-bg").trim() || "#111827",
+      grid: styles.getPropertyValue("--chart-grid").trim() || "#374151",
+      label: styles.getPropertyValue("--chart-label").trim() || "#9ca3af",
+      air: "#38bdf8",
+      water: "#22c55e",
+      noise: "#8b5cf6"
+    };
+  },
   
   setupDashboardControls: function() {
     const modeButtons = document.querySelectorAll('.dashboard-mode-btn');
@@ -443,45 +455,45 @@ EcoPulse.DashboardManager = {
     // Initialize the pollution trend chart
     const ctx = document.getElementById('pollution-trend-chart');
     if (ctx) {
-      // In a real implementation, we would use Chart.js or similar
-      // For now, we'll just set up the canvas dimensions
       const container = ctx.parentElement;
-      ctx.width = container.clientWidth;
-      ctx.height = 300;
-      
-      // Draw a placeholder chart
-      const canvas = ctx.getContext('2d');
-      canvas.fillStyle = '#374151';
-      canvas.fillRect(0, 0, ctx.width, ctx.height);
-      
-      // Draw a simple line chart placeholder
-      canvas.strokeStyle = '#38bdf8';
-      canvas.lineWidth = 3;
-      canvas.beginPath();
-      canvas.moveTo(0, ctx.height - 50);
-      
-      // Generate a simple wave pattern
-      for (let i = 0; i < ctx.width; i += 20) {
-        const y = ctx.height - 80 - Math.sin(i / 30) * 30 - Math.random() * 20;
-        canvas.lineTo(i, y);
-      }
-      canvas.stroke();
-      
-      // Add labels
-      canvas.fillStyle = '#9ca3af';
-      canvas.font = '12px Arial';
-      canvas.fillText('Air', 10, 20);
-      canvas.fillStyle = '#22c55e';
-      canvas.fillText('Water', 10, 40);
-      canvas.fillStyle = '#8b5cf6';
-      canvas.fillText('Noise', 10, 60);
-      
-      // Update when window resizes
-      window.addEventListener('resize', () => {
+
+      const renderChart = () => {
+        const colors = this.getChartColors();
         ctx.width = container.clientWidth;
         ctx.height = 300;
-        this.initPollutionChart();
-      });
+
+        const canvas = ctx.getContext('2d');
+        canvas.clearRect(0, 0, ctx.width, ctx.height);
+        canvas.fillStyle = colors.background;
+        canvas.fillRect(0, 0, ctx.width, ctx.height);
+
+        canvas.strokeStyle = colors.air;
+        canvas.lineWidth = 3;
+        canvas.beginPath();
+        canvas.moveTo(0, ctx.height - 50);
+
+        for (let i = 0; i < ctx.width; i += 20) {
+          const y = ctx.height - 80 - Math.sin(i / 30) * 30 - Math.random() * 20;
+          canvas.lineTo(i, y);
+        }
+        canvas.stroke();
+
+        canvas.fillStyle = colors.label;
+        canvas.font = '12px Arial';
+        canvas.fillText('Air', 10, 20);
+        canvas.fillStyle = colors.water;
+        canvas.fillText('Water', 10, 40);
+        canvas.fillStyle = colors.noise;
+        canvas.fillText('Noise', 10, 60);
+      };
+
+      if (!this._chartResizeHandler) {
+        this._chartResizeHandler = () => renderChart();
+        window.addEventListener('resize', this._chartResizeHandler);
+        document.addEventListener('ecopulse-theme-change', this._chartResizeHandler);
+      }
+
+      renderChart();
     }
   },
   
@@ -569,6 +581,51 @@ document.addEventListener("DOMContentLoaded", () => {
     yearSpan.textContent = new Date().getFullYear();
   }
 });
+
+const dots = document.querySelectorAll(".cursor-dot");
+
+const historyLength = dots.length;
+const mouseHistory = Array.from({ length: historyLength }, () => ({
+  x: 0,
+  y: 0,
+}));
+
+let mouseX = 0;
+let mouseY = 0;
+
+// Current visual positions (for smoothing)
+const visualPositions = Array.from({ length: historyLength }, () => ({
+  x: 0,
+  y: 0,
+}));
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateCursorTrail() {
+  // Add current mouse position to history
+  mouseHistory.unshift({ x: mouseX, y: mouseY });
+  mouseHistory.pop();
+
+  dots.forEach((dot, index) => {
+    const target = mouseHistory[index];
+    const current = visualPositions[index];
+
+    // Smooth easing (THIS controls speed)
+    current.x += (target.x - current.x) * 0.18;
+    current.y += (target.y - current.y) * 0.18;
+
+    dot.style.left = current.x + "px";
+    dot.style.top = current.y + "px";
+  });
+
+  requestAnimationFrame(animateCursorTrail);
+}
+
+animateCursorTrail();
+
 // ===============================
 // PRECAUTION MODAL FUNCTIONS (GLOBAL)
 // ===============================
@@ -632,4 +689,34 @@ function closePrecautions() {
   modal.classList.remove("flex");
 }
 
+// Cursor Glow Effect
+(() => {
+  const glow = document.getElementById('cursor-glow');
+  if (!glow) return;
+
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+
+  const speed = 0.15;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    glow.style.opacity = '1';
+  });
+
+  window.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+
+  function animate() {
+    currentX += (mouseX - currentX) * speed;
+    currentY += (mouseY - currentY) * speed;
+
+    glow.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
 

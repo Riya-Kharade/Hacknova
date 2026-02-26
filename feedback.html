@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback - EcoPulse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'eco-green': '#10B981',
+            'eco-blue': '#3B82F6',
+            'eco-purple': '#8B5CF6'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+
+  <div class="bg-gray-800 p-10 rounded-3xl shadow-xl w-full max-w-lg border border-gray-700">
+
+    <h2 class="text-3xl font-bold mb-6 text-center text-eco-green">
+      Share Your Feedback
+    </h2>
+
+    <form id="feedback-form" class="space-y-5">
+
+  <!-- Name -->
+  <div>
+    <input type="text" id="name"
+           placeholder="Your Name"
+           class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-eco-green transition">
+    <p id="name-error" class="text-red-400 text-sm mt-1 hidden">
+      Please enter your name
+    </p>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <input type="email" id="email"
+           placeholder="Your Email"
+           class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-eco-green transition">
+    <p id="email-error" class="text-red-400 text-sm mt-1 hidden">
+      Please enter a valid email
+    </p>
+  </div>
+
+  <!-- Feedback -->
+  <div>
+    <textarea rows="4" id="message"
+              placeholder="Write your feedback..."
+              class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-eco-green transition"></textarea>
+    <p id="message-error" class="text-red-400 text-sm mt-1 hidden">
+      Feedback cannot be empty
+    </p>
+  </div>
+
+  <button type="submit"
+          class="w-full py-3 bg-gradient-to-r from-eco-blue to-eco-green rounded-lg font-semibold hover:opacity-90 transition">
+    Submit Feedback
+  </button>
+
+</form>
+
+
+    <!-- Popup Message -->
+    <div id="thank-you-popup"
+         class="hidden mt-6 p-4 bg-eco-green/20 border border-eco-green rounded-lg text-center text-eco-green font-semibold">
+      ✅ Thank you for your feedback!
+    </div>
+
+  </div>
+
+<script>
+  const form = document.getElementById("feedback-form");
+  const popup = document.getElementById("thank-you-popup");
+
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const messageInput = document.getElementById("message");
+
+  const nameError = document.getElementById("name-error");
+  const emailError = document.getElementById("email-error");
+  const messageError = document.getElementById("message-error");
+
+  function validateEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let isValid = true;
+
+    // Reset errors
+    nameError.classList.add("hidden");
+    emailError.classList.add("hidden");
+    messageError.classList.add("hidden");
+
+    nameInput.classList.remove("border-red-500");
+    emailInput.classList.remove("border-red-500");
+    messageInput.classList.remove("border-red-500");
+
+    // Name validation
+    if (nameInput.value.trim() === "") {
+      nameError.classList.remove("hidden");
+      nameInput.classList.add("border-red-500");
+      isValid = false;
+    }
+
+    // Email validation
+    if (!validateEmail(emailInput.value.trim())) {
+      emailError.classList.remove("hidden");
+      emailInput.classList.add("border-red-500");
+      isValid = false;
+    }
+
+    // Message validation
+    if (messageInput.value.trim() === "") {
+      messageError.classList.remove("hidden");
+      messageInput.classList.add("border-red-500");
+      isValid = false;
+    }
+
+    if (isValid) {
+      popup.classList.remove("hidden");
+      form.reset();
+
+      setTimeout(() => {
+        popup.classList.add("hidden");
+      }, 3000);
+    }
+  });
+</script>
+
+</body>
+</html>
