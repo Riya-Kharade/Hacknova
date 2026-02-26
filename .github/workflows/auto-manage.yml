@@ -1,0 +1,41 @@
+name: PR Label and Assign
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  label-assign:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Add labels and assign author
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+
+            // Difficulty label based on changes
+            const lines = pr.additions + pr.deletions;
+            let difficulty = "Easy";
+            if (lines > 50 && lines <= 200) difficulty = "Medium";
+            if (lines > 200) difficulty = "Hard";
+
+            // Add labels to PR
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: ["SWoC26", "ECWoC26", difficulty]
+            });
+
+            // Assign PR creator
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              assignees: [pr.user.login]
+            });

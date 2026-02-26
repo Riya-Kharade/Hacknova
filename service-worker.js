@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hacknova-cache-v1';
+const CACHE_NAME = 'hacknova-cache-v2';
 
 const CORE_ASSETS = [
   '/',
@@ -13,6 +13,7 @@ const CORE_ASSETS = [
 
   '/js/main.js',
   '/js/script.js',
+  '/js/theme.js',
   '/js/air.js',
   '/js/air-3d.js',
   '/js/water.js',

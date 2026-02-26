@@ -50,6 +50,9 @@ class WaterPollutionScene {
             this.renderer.setSize(container.clientWidth, container.clientHeight);
             this.renderer.setClearColor(0x87CEEB, 1);
             container.appendChild(this.renderer.domElement);
+
+            this.applyTheme();
+            document.addEventListener('ecopulse-theme-change', () => this.applyTheme());
             
             // Add lighting
             this.addLighting();
@@ -85,6 +88,24 @@ class WaterPollutionScene {
             
         } catch (error) {
             console.error('Error initializing Water Pollution Scene:', error);
+        }
+    }
+
+    applyTheme() {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const palette = isLight
+            ? { background: 0x87CEEB, fog: 0x87CEEB }
+            : { background: 0x0b1020, fog: 0x0b1020 };
+
+        if (this.scene) {
+            this.scene.background = new THREE.Color(palette.background);
+            if (this.scene.fog) {
+                this.scene.fog.color.setHex(palette.fog);
+            }
+        }
+
+        if (this.renderer) {
+            this.renderer.setClearColor(palette.background, 1);
         }
     }
     
