@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoPulse Presentation - Hackathon 2024</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="ecopulse-logo.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         .slide {
             display: none;
@@ -16,6 +19,7 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
+
         .slide.active {
             display: flex;
             opacity: 1;
@@ -60,6 +64,7 @@
                 display: flex !important;
                 page-break-after: always;
             }
+
             .controls-section,
             .nav-helper,
             #exit-btn {
@@ -84,12 +89,13 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-gradient-to-r from-eco-blue to-eco-green rounded-lg flex items-center justify-center">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-eco-blue to-eco-green rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-xl">E</span>
                     </div>
                     <span class="text-2xl font-bold gradient-text">EcoPulse</span>
                 </a>
-                
+
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="nav-link active text-eco-blue font-medium">Home</a>
@@ -100,16 +106,18 @@
                     <a href="ai-prediction.html" class="nav-link hover:text-purple-400 transition-colors">AI</a>
                     <a href="presentation.html" class="nav-link hover:text-eco-green transition-colors">Demo</a>
                 </div>
-                
+
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Toggle menu" aria-expanded="false">
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors"
+                    aria-label="Toggle menu" aria-expanded="false">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
         </div>
-        
+
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
             <div class="px-4 py-4 space-y-3">
@@ -118,7 +126,8 @@
                 <a href="water.html" class="block py-2 hover:text-eco-blue transition-colors">Water Pollution</a>
                 <a href="light.html" class="block py-2 hover:text-eco-orange transition-colors">Light Pollution</a>
                 <a href="noise.html" class="block py-2 hover:text-eco-purple transition-colors">Noise Pollution</a>
-                <a href="ai-prediction.html" class="block py-2 hover:text-purple-400 transition-colors">AI Prediction</a>
+                <a href="ai-prediction.html" class="block py-2 hover:text-purple-400 transition-colors">AI
+                    Prediction</a>
                 <a href="presentation.html" class="block py-2 hover:text-eco-green transition-colors">Demo</a>
             </div>
         </div>
@@ -143,14 +152,18 @@
         <!-- Slides Wrapper -->
         <main class="slides-wrapper flex-1 overflow-y-auto pt-20">
             <!-- Slide 1: Title -->
-            <section class="slide active items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900/30 to-green-900/30">
+            <section
+                class="slide active items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900/30 to-green-900/30">
                 <div class="text-center px-4">
                     <div class="mb-8">
-                        <div class="w-24 h-24 bg-gradient-to-r from-eco-blue to-eco-green rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div
+                            class="w-24 h-24 bg-gradient-to-r from-eco-blue to-eco-green rounded-full flex items-center justify-center mx-auto mb-6">
                             <span class="text-6xl">🌍</span>
                         </div>
                     </div>
-                    <h1 class="text-7xl font-bold mb-6 bg-gradient-to-r from-white via-eco-green to-white bg-clip-text text-transparent drop-shadow-lg">
+                    <!-- <h1 class="text-7xl font-bold mb-6 bg-gradient-to-r from-white via-eco-green to-white bg-clip-text text-transparent drop-shadow-lg"> -->
+                    <h1
+                        class="text-7xl font-bold bg-gradient-to-r from-blue-400 via-green-400 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(59,130,246,0.5)]">
                         EcoPulse
                     </h1>
                     <p class="text-3xl text-gray-300 mb-8">Environmental Pollution Visualization</p>
@@ -193,13 +206,16 @@
             <!-- Slide 3: Solution -->
             <section class="slide items-center justify-center bg-gradient-to-br from-gray-900 to-blue-900/20">
                 <div class="container mx-auto px-8 max-w-5xl">
-                    <h2 class="text-5xl font-bold mb-12 text-center">Our <span class="text-eco-green">Solution</span></h2>
+                    <h2 class="text-5xl font-bold mb-12 text-center">Our <span class="text-eco-green">Solution</span>
+                    </h2>
                     <div class="grid md:grid-cols-2 gap-8 mb-8">
                         <div class="card">
                             <div class="flex items-center gap-4 mb-4">
                                 <svg class="w-12 h-12 text-eco-blue" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
-                                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                        clip-rule="evenodd" />
                                 </svg>
                                 <h3 class="text-2xl font-bold">Interactive 3D Visualizations</h3>
                             </div>
@@ -208,16 +224,20 @@
                         <div class="card">
                             <div class="flex items-center gap-4 mb-4">
                                 <svg class="w-12 h-12 text-eco-green" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                                    <path
+                                        d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                                 </svg>
                                 <h3 class="text-2xl font-bold">Data Analytics</h3>
                             </div>
-                            <p class="text-gray-300">Chart.js visualizations with regional comparisons and historical trends</p>
+                            <p class="text-gray-300">Chart.js visualizations with regional comparisons and historical
+                                trends</p>
                         </div>
                         <div class="card">
                             <div class="flex items-center gap-4 mb-4">
                                 <svg class="w-12 h-12 text-eco-orange" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                        d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z"
+                                        clip-rule="evenodd" />
                                 </svg>
                                 <h3 class="text-2xl font-bold">Mobile-First</h3>
                             </div>
@@ -226,7 +246,9 @@
                         <div class="card">
                             <div class="flex items-center gap-4 mb-4">
                                 <svg class="w-12 h-12 text-eco-purple" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
                                 </svg>
                                 <h3 class="text-2xl font-bold">Actionable Insights</h3>
                             </div>
@@ -237,9 +259,11 @@
             </section>
 
             <!-- Slide 4: Features Deep Dive -->
-            <section class="slide items-center justify-center bg-gradient-to-br from-red-950/30 via-gray-900 to-orange-950/30">
+            <section
+                class="slide items-center justify-center bg-gradient-to-br from-red-950/30 via-gray-900 to-orange-950/30">
                 <div class="container mx-auto px-8 max-w-5xl">
-                    <h2 class="text-5xl font-bold mb-12 text-center">Features <span class="text-eco-red">Showcase</span></h2>
+                    <h2 class="text-5xl font-bold mb-12 text-center">Features <span class="text-eco-red">Showcase</span>
+                    </h2>
                     <div class="grid md:grid-cols-2 gap-8">
                         <div class="card">
                             <div class="flex items-center gap-4 mb-4">
@@ -296,7 +320,8 @@
             <!-- Slide 5: Data & Analytics -->
             <section class="slide items-center justify-center bg-gray-900">
                 <div class="container mx-auto px-8 max-w-5xl">
-                    <h2 class="text-5xl font-bold mb-12 text-center">Data <span class="text-eco-blue">Analytics</span></h2>
+                    <h2 class="text-5xl font-bold mb-12 text-center">Data <span class="text-eco-blue">Analytics</span>
+                    </h2>
                     <div class="grid md:grid-cols-2 gap-8 mb-8">
                         <div class="card">
                             <h3 class="text-2xl font-bold mb-4 text-eco-green">Regional Coverage</h3>
@@ -353,14 +378,16 @@
                                     <span class="text-eco-blue font-bold">6.75M deaths</span>
                                 </div>
                                 <div class="mt-4 pt-4 border-t border-gray-700">
-                                    <p class="text-sm text-gray-400">Trend: <span class="text-eco-green">Improving in some regions</span></p>
+                                    <p class="text-sm text-gray-400">Trend: <span class="text-eco-green">Improving in
+                                            some regions</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card bg-gradient-to-r from-eco-blue/10 to-eco-green/10 border-eco-blue/30">
                         <div class="text-center">
-                            <p class="text-xl text-gray-300">Comprehensive data spanning <span class="text-eco-blue font-bold">2018-2024</span></p>
+                            <p class="text-xl text-gray-300">Comprehensive data spanning <span
+                                    class="text-eco-blue font-bold">2018-2024</span></p>
                             <p class="text-gray-400 mt-2">Covering 6 continents, 195 countries, and 1000+ cities</p>
                         </div>
                     </div>
@@ -368,9 +395,11 @@
             </section>
 
             <!-- Slide 6: Mobile Experience -->
-            <section class="slide items-center justify-center bg-gradient-to-br from-purple-950/30 via-gray-900 to-blue-950/30">
+            <section
+                class="slide items-center justify-center bg-gradient-to-br from-purple-950/30 via-gray-900 to-blue-950/30">
                 <div class="container mx-auto px-8 max-w-5xl">
-                    <h2 class="text-5xl font-bold mb-12 text-center">Mobile-First <span class="text-eco-purple">Design</span></h2>
+                    <h2 class="text-5xl font-bold mb-12 text-center">Mobile-First <span
+                            class="text-eco-purple">Design</span></h2>
                     <div class="grid md:grid-cols-3 gap-8 mb-8">
                         <div class="card text-center">
                             <div class="text-5xl mb-4">📱</div>
@@ -416,7 +445,8 @@
             <!-- Slide 7: Tech Stack -->
             <section class="slide items-center justify-center bg-gray-900">
                 <div class="container mx-auto px-8 max-w-5xl">
-                    <h2 class="text-5xl font-bold mb-12 text-center">Built With <span class="text-eco-blue">Modern Tech</span></h2>
+                    <h2 class="text-5xl font-bold mb-12 text-center">Built With <span class="text-eco-blue">Modern
+                            Tech</span></h2>
                     <div class="grid md:grid-cols-3 gap-6">
                         <div class="card text-center">
                             <h3 class="text-2xl font-bold mb-3 text-eco-blue">Three.js</h3>
@@ -456,9 +486,11 @@
             </section>
 
             <!-- Slide 8: Impact & Future -->
-            <section class="slide items-center justify-center bg-gradient-to-br from-green-950/30 via-gray-900 to-teal-950/30">
+            <section
+                class="slide items-center justify-center bg-gradient-to-br from-green-950/30 via-gray-900 to-teal-950/30">
                 <div class="container mx-auto px-8 max-w-5xl">
-                    <h2 class="text-5xl font-bold mb-12 text-center">Impact & <span class="text-eco-green">Future</span></h2>
+                    <h2 class="text-5xl font-bold mb-12 text-center">Impact & <span class="text-eco-green">Future</span>
+                    </h2>
                     <div class="grid md:grid-cols-2 gap-8 mb-8">
                         <div class="card">
                             <h3 class="text-2xl font-bold mb-6 text-eco-blue">Current Impact</h3>
@@ -467,21 +499,24 @@
                                     <span class="text-eco-green text-2xl">✓</span>
                                     <div>
                                         <p class="font-bold">Educational Reach</p>
-                                        <p class="text-sm text-gray-400">Making pollution data accessible to students & educators</p>
+                                        <p class="text-sm text-gray-400">Making pollution data accessible to students &
+                                            educators</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <span class="text-eco-green text-2xl">✓</span>
                                     <div>
                                         <p class="font-bold">Public Awareness</p>
-                                        <p class="text-sm text-gray-400">Interactive visualizations increase understanding</p>
+                                        <p class="text-sm text-gray-400">Interactive visualizations increase
+                                            understanding</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <span class="text-eco-green text-2xl">✓</span>
                                     <div>
                                         <p class="font-bold">Data-Driven Decisions</p>
-                                        <p class="text-sm text-gray-400">Supporting policy makers with clear insights</p>
+                                        <p class="text-sm text-gray-400">Supporting policy makers with clear insights
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -493,7 +528,8 @@
                                     <span class="text-eco-orange text-2xl">▶</span>
                                     <div>
                                         <p class="font-bold">Real-Time Data</p>
-                                        <p class="text-sm text-gray-400">API integration for live pollution monitoring</p>
+                                        <p class="text-sm text-gray-400">API integration for live pollution monitoring
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="flex items-start gap-3">
@@ -507,7 +543,8 @@
                                     <span class="text-eco-orange text-2xl">▶</span>
                                     <div>
                                         <p class="font-bold">Community Features</p>
-                                        <p class="text-sm text-gray-400">User accounts, sharing, and collaboration tools</p>
+                                        <p class="text-sm text-gray-400">User accounts, sharing, and collaboration tools
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -515,17 +552,20 @@
                     </div>
                     <div class="card bg-gradient-to-r from-eco-blue/10 to-eco-purple/10 border-eco-blue/30 text-center">
                         <p class="text-2xl font-bold mb-2">Join Us in Making a Difference</p>
-                        <p class="text-gray-400">Every visualization viewed is a step toward greater environmental awareness</p>
+                        <p class="text-gray-400">Every visualization viewed is a step toward greater environmental
+                            awareness</p>
                     </div>
                 </div>
             </section>
 
             <!-- Slide 9: Call to Action -->
-            <section class="slide items-center justify-center bg-gradient-to-br from-gray-900 via-green-900/30 to-blue-900/30">
+            <section
+                class="slide items-center justify-center bg-gradient-to-br from-gray-900 via-green-900/30 to-blue-900/30">
                 <div class="text-center px-4">
                     <h2 class="text-6xl font-bold mb-8">Let's Make an <span class="text-eco-green">Impact</span></h2>
                     <p class="text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                        Awareness is the first step toward change. EcoPulse makes environmental data accessible to everyone.
+                        Awareness is the first step toward change. EcoPulse makes environmental data accessible to
+                        everyone.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
                         <a href="index.html" class="btn btn-primary px-8 py-4 text-xl">View Live Demo</a>
@@ -575,10 +615,10 @@
 
 
         <!-- Controls Section -->
-        <footer class="controls-section no-print sticky bottom-0 bg-gradient-to-t from-gray-900 via-gray-900/90 to-transparent py-4">
+        <footer
+            class="controls-section no-print sticky bottom-0 bg-gradient-to-t from-gray-900 via-gray-900/90 to-transparent py-4">
             <div class="flex gap-3 justify-center items-center">
-                <button id="prev-btn"
-                    class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                <button id="prev-btn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
                     aria-label="Previous slide">
                     ← Prev
                 </button>
@@ -589,8 +629,7 @@
                     <span id="total-slides">9</span>
                 </div>
 
-                <button id="next-btn"
-                    class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+                <button id="next-btn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
                     aria-label="Next slide">
                     Next →
                 </button>
@@ -598,13 +637,14 @@
         </footer>
     </div>
 
+    <script src="js/theme.js"></script>
     <script>
         class PresentationController {
             constructor() {
                 this.slides = document.querySelectorAll('.slide');
                 this.currentSlide = 0;
                 this.totalSlides = this.slides.length;
-                
+
                 document.getElementById('total-slides').textContent = this.totalSlides;
                 this.setupControls();
                 this.setupKeyboard();

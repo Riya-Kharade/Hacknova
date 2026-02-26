@@ -7,6 +7,7 @@
     <title>Water Pollution - EcoPulse</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
 
@@ -323,7 +324,13 @@
                     <span class="text-white font-bold text-2xl">E</span>
                 </div>
             </div>
-            <p class="text-gray-500 text-sm">&copy; 2024 EcoPulse. Environmental Monitoring System.</p>
+            <p class="text-gray-500 text-sm">
+       &copy; <span id="year"></span> EcoPulse. Environmental Monitoring System.
+           </p>
+
+        <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
         </div>
     </footer>
 
@@ -334,6 +341,7 @@
         </svg>
     </button>
 
+    <script src="js/theme.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/water-3d.js"></script>
     <script src="js/water.js"></script>

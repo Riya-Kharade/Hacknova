@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Light Pollution - EcoPulse</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -334,7 +335,13 @@
                     <span class="text-white font-bold text-2xl">E</span>
                 </div>
             </div>
-            <p class="text-gray-500 text-sm">&copy; 2024 EcoPulse. Environmental Monitoring System.</p>
+            <p class="text-gray-500 text-sm">
+       &copy; <span id="year"></span> EcoPulse. Environmental Monitoring System.
+          </p>
+
+        <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+        </script> 
         </div>
     </footer>
 
@@ -345,6 +352,7 @@
         </svg>
     </button>
 
+    <script src="js/theme.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/light-3d.js"></script>
     <script src="js/light.js"></script>
