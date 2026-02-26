@@ -7,10 +7,16 @@
     <title>Water Pollution - EcoPulse</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/water.css">
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+
+    <link rel="icon" type="image/png" href="ecopulse-logo.png">
+
     <script>
         tailwind.config = {
             theme: {
@@ -50,6 +56,10 @@
 </head>
 
 <body class="bg-gray-900 text-white font-['Inter']">
+    <div id="network-status" class="online">
+  You are back online
+</div>
+
     <!-- Skip to Content Link for Accessibility -->
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only" aria-label="Skip to main content">Skip to main content</a>
     
@@ -216,7 +226,9 @@
                                 </div>
                                 <div class="relative w-full h-6 flex items-center">
                                     <input type="range" id="water-pollution-slider" min="0" max="100" value="75"
-                                        class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-eco-blue hover:accent-blue-400 transition-all z-10"
+                                        class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer 
+                                        accent-eco-blue hover:accent-blue-400 transition-all z-10  hover:opacity-90
+                                  focus:outline-none focus:ring-2 focus:ring-orange-500/40 "
                                         role="slider" aria-label="Water pollution level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
                                 </div>
                                 <div class="flex justify-between text-xs text-gray-500 mt-2 font-mono">
@@ -292,19 +304,17 @@
                 </div>
             </div>
         </section>
-    </main>
-
-    <footer class="bg-gray-900 border-t border-gray-800 py-12">
-        <div class="container mx-auto px-4 text-center">
-            <div class="mb-6 flex justify-center">
-                <div
-                    class="w-12 h-12 bg-gradient-to-r from-eco-blue to-eco-green rounded-lg flex items-center justify-center mr-2">
-                    <span class="text-white font-bold text-2xl">E</span>
-                </div>
+            <div class="cursor-container">
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
+                <span class="cursor-dot-water"></span>
             </div>
-            <p class="text-gray-500 text-sm">&copy; 2024 EcoPulse. Environmental Monitoring System.</p>
-        </div>
-    </footer>
+    </main>
 
     <button id="scroll-to-top"
         class="fixed bottom-8 right-8 p-3 bg-eco-blue text-white rounded-full shadow-lg shadow-blue-500/20 opacity-0 invisible transition-all duration-300 hover:bg-blue-600 transform translate-y-4 hover:-translate-y-1 z-50">
@@ -313,9 +323,83 @@
         </svg>
     </button>
 
+    <script src="js/footer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/water-3d.js"></script>
     <script src="js/water.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Initialize EcoPulse functionality -->
+    <script>
+        // Initialize EcoPulse functionality on this page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize mobile menu if EcoPulse is available
+            if (window.EcoPulse && typeof EcoPulse.initMobileMenu === 'function') {
+                EcoPulse.initMobileMenu();
+            }
+            
+            // Initialize scroll to top if available
+            if (window.EcoPulse && typeof EcoPulse.initScrollToTop === 'function') {
+                EcoPulse.initScrollToTop();
+            }
+            
+            // Initialize scroll reveal for water page specific elements
+            if (window.EcoPulse && typeof EcoPulse.initScrollReveal === 'function') {
+                EcoPulse.initScrollReveal();
+            }
+            
+            // Additional water-specific scroll reveal for any new elements
+            const waterReveals = document.querySelectorAll('.glass-card, .animate-slide-up');
+            if (waterReveals.length && window.IntersectionObserver) {
+                const waterObserver = new IntersectionObserver(
+                    (entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.opacity = '1';
+                                entry.target.style.transform = 'translateY(0)';
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+                
+                waterReveals.forEach(el => {
+                    // Set initial state for animation
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    waterObserver.observe(el);
+                });
+            }
+        });
+    </script>
+
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    });
+  }
+
+  // Optional: Network status feedback
+  window.addEventListener('offline', () => {
+    console.warn('You are offline');
+  });
+
+  window.addEventListener('online', () => {
+    console.log('Back online');
+  });
+</script>
+<div id="cursor-glow"></div>
+
 </body>
 
 </html>
