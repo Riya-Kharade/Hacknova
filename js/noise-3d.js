@@ -49,6 +49,9 @@ class NoisePollutionScene {
             this.renderer.setSize(container.clientWidth, container.clientHeight);
             this.renderer.setClearColor(0x222233, 1);
             container.appendChild(this.renderer.domElement);
+
+            this.applyTheme();
+            document.addEventListener('ecopulse-theme-change', () => this.applyTheme());
             
             // Add lighting
             this.addLighting();
@@ -86,6 +89,29 @@ class NoisePollutionScene {
             console.error('Error initializing Noise Pollution Scene:', error);
         }
     }
+
+    applyTheme() {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const palette = isLight
+            ? { background: 0xe2e8f0, fog: 0xcbd5f5, ground: 0xf1f5f9 }
+            : { background: 0x222233, fog: 0x222233, ground: 0x333333 };
+
+        if (this.scene) {
+            this.scene.background = new THREE.Color(palette.background);
+            if (this.scene.fog) {
+                this.scene.fog.color.setHex(palette.fog);
+            }
+        }
+
+        if (this.renderer) {
+            this.renderer.setClearColor(palette.background, 1);
+        }
+
+        if (this.ground && this.ground.material) {
+            this.ground.material.color.setHex(palette.ground);
+            this.ground.material.needsUpdate = true;
+        }
+    }
     
     addLighting() {
         // Ambient light
@@ -113,6 +139,7 @@ class NoisePollutionScene {
         const ground = new THREE.Mesh(groundGeometry, groundMaterial);
         ground.rotation.x = -Math.PI / 2;
         this.scene.add(ground);
+        this.ground = ground;
         
         // Create city blocks with varying noise sources
         for (let x = -20; x <= 20; x += 8) {

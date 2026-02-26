@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Pollution Prediction | EcoPulse</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="icon" type="image/png" href="ecopulse-logo.png">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -506,59 +507,54 @@
     <div class="particles-container" id="particles"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-blur border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="h-16 flex items-center justify-between">
-                <!-- LEFT: Logo -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800 transition-all duration-300"
+        id="navbar">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="flex items-center space-x-2">
                     <div
                         class="w-10 h-10 bg-gradient-to-r from-eco-blue to-eco-green rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-xl">E</span>
                     </div>
                     <span class="text-2xl font-bold gradient-text">EcoPulse</span>
+                    
                 </a>
 
-                <!-- RIGHT: Desktop Nav -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="block py-2 text-white hover:text-eco-green transition-colors">
-                        Home
-                    </a>
-                    <a href="air.html" class="block py-2 text-white hover:text-eco-green transition-colors">Air</a>
-                    <a href="water.html" class="block py-2 text-white hover:text-eco-blue transition-colors">Water</a>
-                    <a href="light.html" class="block py-2 text-white hover:text-eco-orange transition-colors">Light</a>
-                    <a href="ai-prediction.html" class="block py-2 text-white hover:text-purple-400 transition-colors">
-                        AI Prediction
-                    </a>
-                </div>
 
-                <!-- RIGHT: Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors"
-                    aria-label="Toggle menu" aria-expanded="false">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800" id="navbar">
+        <div class="container mx-auto px-4 h-16 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-r from-eco-blue to-eco-green rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">E</span>
+                </div>
+ feat/live-countdown-sticky-cta
+                <span class="text-2xl font-bold gradient-text">EcoPulse</span>
+            </a>
+
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-white">
+                    
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
+                            d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full
-            bg-gray-900 border-t border-gray-800
-            transition-all duration-200 ease-out">
-
-
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-900 border-t border-gray-800 absolute w-full shadow-2xl">
             <div class="px-4 py-4 space-y-3">
-                <a href="index.html" class="block py-2 text-white hover:text-eco-green transition-colors">Home</a>
-                <a href="air.html" class="block py-2 text-white hover:text-eco-green transition-colors">Air
-                    Pollution</a>
-                <a href="water.html" class="block py-2 text-white hover:text-eco-blue transition-colors">Water
-                    Pollution</a>
-                <a href="light.html" class="block py-2 text-white hover:text-eco-orange transition-colors">Light
-                    Pollution</a>
-                <a href="ai-prediction.html" class="block py-2 text-white hover:text-purple-400 transition-colors">AI
+                <a href="#home" class="block py-2 text-gray-300 hover:text-white focus-outline" tabindex="0">Home</a>
+                <a href="air.html" class="block py-2 text-gray-300 hover:text-eco-red focus-outline" tabindex="0">Air Pollution</a>
+                <a href="water.html" class="block py-2 text-gray-300 hover:text-eco-blue focus-outline" tabindex="0">Water Pollution</a>
+                <a href="light.html" class="block py-2 text-gray-300 hover:text-eco-orange focus-outline" tabindex="0">Light Pollution</a>
+                <a href="noise.html" class="block py-2 text-gray-300 hover:text-eco-purple focus-outline" tabindex="0">Noise Pollution</a>
+                <a href="ai-prediction.html" class="block py-2 hover:text-purple-400 transition-colors focus-outline" tabindex="0">AI
                     Prediction</a>
+                <a href="presentation.html"
+                    class="block py-3 px-4 rounded-lg hover:bg-gray-800 hover:text-eco-green transition-colors">Demo</a>
             </div>
+
         </div>
     </nav>
 
@@ -976,6 +972,7 @@
         });
     </script>
 
+    <script src="js/theme.js"></script>
     <script src="js/data-loader.js"></script>
     <script src="js/ai-visualizations.js"></script>
     <script src="js/ai-model.js"></script>
@@ -1002,5 +999,6 @@
 
 </body>
 <div id="cursor-glow"></div>
+
 
 </html>
