@@ -46,6 +46,9 @@ class AirPollutionScene {
             this.renderer.setSize(container.clientWidth, container.clientHeight);
             this.renderer.setClearColor(0x000000, 0);
             container.appendChild(this.renderer.domElement);
+
+            this.applyTheme();
+            document.addEventListener('ecopulse-theme-change', () => this.applyTheme());
             
             // Add lighting
             this.addLighting();
@@ -79,6 +82,19 @@ class AirPollutionScene {
             
         } catch (error) {
             console.error('Error initializing Air Pollution Scene:', error);
+        }
+    }
+
+    applyTheme() {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const fogColor = isLight ? 0xdbeafe : 0x000000;
+
+        if (this.scene && this.scene.fog) {
+            this.scene.fog.color.setHex(fogColor);
+        }
+
+        if (this.renderer) {
+            this.renderer.setClearColor(fogColor, 0);
         }
     }
     
